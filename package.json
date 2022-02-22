@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@unsplash/sum-types-fast-check",
   "description": "fast-check bindings for @unsplash/sum-types.",
   "version": "0.1.0",
@@ -17,16 +16,21 @@
     "sum-types",
     "fast-check"
   ],
-  "main": "./index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsc -p ./tsconfig.build.json",
+    "build": "rm -rf ./dist/ && mkdir -p ./dist/esm/ ./dist/cjs/ && tsc -p ./tsconfig.build-esm.json && tsc -p ./tsconfig.build-cjs.json && tsc -p ./tsconfig.build-types.json",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src/ ./test/ --ext ts",
     "fmt": "prettier .",
     "unit": "jest",
     "docs": "docs-ts",
-    "prepub": "rm -rf dist && mkdir -p dist && cp ./README.md ./dist/ && cat ./package.json | grep -v '\"private\":' > ./dist/package.json && yarn run build"
+    "prepublish": "yarn run build"
   },
   "devDependencies": {
     "@types/eslint": "^7.0.0",
