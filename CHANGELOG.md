@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.2.0 (2022-09-05)
+
+Support `@unsplash/sum-types` ^0.3.0.
+
 ## 0.1.1 (2022-02-22)
 
 Add ESM support.
