@@ -60,7 +60,12 @@ export const getArb = <A extends Sum.AnyMember>(
           val => [tag, val] as const,
         ),
       )
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .map(([tag, val]) => Sum.create<A>().mk[tag](val as any))
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore We need a universal interface as we can't distinguish a
+      // nullary constructor from a constructor that holds `null`. We happen to
+      // know that the internal implementation of sum-types has the function
+      // constructor always available even if the types don't say that.
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      .map(([tag, val]): A => Sum.create<A>().mk[tag](val as unknown))
   )
 }
