@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.3.0 (2023-01-04)
+
+`fast-check` peer dependency set to version `^3.5.0`.
+
 ## 0.2.0 (2022-09-05)
 
 Support `@unsplash/sum-types` ^0.3.0.
