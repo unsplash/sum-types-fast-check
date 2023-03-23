@@ -28,24 +28,21 @@ instance for all `A`.
 **Signature**
 
 ```ts
-export declare const getArb: <A extends Sum.AnyMember>(arbs: Arbs<A>) => fc.Arbitrary<A>
+export declare const getArb: <A extends Sum.AnyMember>(sum: Sum.Sum<A>) => (arbs: Arbs<A>) => fc.Arbitrary<A>
 ```
 
 **Example**
 
 ```ts
-import { Member, create } from '@unsplash/sum-types'
+import * as Sum from '@unsplash/sum-types'
 import { getArb, nullaryArb } from '@unsplash/sum-types-fast-check'
 import fc from 'fast-check'
 
-type Weather = Member<'Sun'> | Member<'Rain', number>
+type Weather = Sum.Member<'Sun'> | Sum.Member<'Rain', number>
 
-const {
-  mk: { Sun, Rain },
-  match,
-} = create<Weather>()
+const Weather = Sum.create<Weather>()
 
-const arbWeather = getArb<Weather>({
+const arbWeather = getArb(Weather)({
   Sun: nullaryArb,
   Rain: fc.integer(),
 })

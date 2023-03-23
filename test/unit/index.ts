@@ -9,29 +9,26 @@
 // This isn't much different to how fast-check itself tests distribution:
 // https://github.com/dubzzz/fast-check/blob/main/test/e2e/RandomEnough.spec.ts
 
-// Beware that `toEqual` and friends don't play very nicely with sum types as
-// they use `Proxy` under the hood, thus we should instead test against
-// their serialized forms.
-
 import fc from "fast-check"
 import * as Sum from "@unsplash/sum-types"
 import { getArb, nullaryArb } from "../../src/index"
 
 describe("index", () => {
-  const tag = <A>(x: readonly [A, unknown]): A => x[0]
-  const val = <A>(x: readonly [unknown, A]): A => x[1]
+  const tag = <A extends string>(x: Sum.Member<A, unknown>): string =>
+    Sum.serialize(x)[0]
+  const val = <A>(x: Sum.Member<string, A>): A => Sum.serialize(x)[1]
 
   describe("getArb", () => {
     type Weather = Sum.Member<"Sun"> | Sum.Member<"Rain", number>
     const Weather = Sum.create<Weather>()
-    const weatherArb = getArb<Weather>({
+    const weatherArb = getArb(Weather)({
       Sun: nullaryArb,
       Rain: fc.integer(),
     })
-    const sums = fc.sample(weatherArb).map(Sum.serialize)
+    const sums = fc.sample(weatherArb)
 
     it("generates nullary values using nullary arbitrary", () => {
-      expect(sums).toContainEqual(["Sun", null])
+      expect(sums).toContainEqual(Weather.mk.Sun)
     })
 
     it("generates non-nullary values using provided arbitrary", () => {
@@ -40,6 +37,17 @@ describe("index", () => {
 
       const isNumber = (x: unknown): boolean => typeof x === "number"
       expect(rains.map(val).every(isNumber)).toBe(true)
+    })
+
+    it("generates reference-equal members", () => {
+      /* eslint-disable @typescript-eslint/no-non-null-assertion */
+      const sun = sums.find(sum => tag(sum) === "Sun")!
+      const rain = sums.find(sum => tag(sum) === "Rain")!
+      /* eslint-enable @typescript-eslint/no-non-null-assertion */
+
+      expect(sun).toEqual(sun)
+      expect(rain).toEqual(rain)
+      expect(sun).not.toEqual(rain)
     })
   })
 })
