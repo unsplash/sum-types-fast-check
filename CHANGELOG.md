@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.4.0 (2023-03-23)
+
+Fix nullary equality checks in Jest and others that compare the reference equality of functions.
+
 ## 0.3.0 (2023-01-04)
 
 `fast-check` peer dependency set to version `^3.5.0`.
