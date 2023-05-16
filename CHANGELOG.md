@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.5.0 (2023-05-16)
+
+Support `@unsplash/sum-types` ^0.3.0.
+
 ## 0.4.0 (2023-03-23)
 
 Fix nullary equality checks in Jest and others that compare the reference equality of functions.
