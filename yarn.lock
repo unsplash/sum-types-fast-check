@@ -800,10 +800,10 @@
     "@typescript-eslint/types" "4.31.0"
     eslint-visitor-keys "^2.0.0"
 
-"@unsplash/sum-types@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@unsplash/sum-types/-/sum-types-0.3.2.tgz#192592794ee3e0918c630cf4092445a652538257"
-  integrity sha512-O/OkIjlrft5YFbhJohfAICQf06eoZGS2ui9yb2qs3YekXsq+rwN8GetzHjf5P2WyZNfydVx/z4BqK2ULFhh+yQ==
+"@unsplash/sum-types@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@unsplash/sum-types/-/sum-types-0.4.0.tgz#56e1864c2801f35d3e60451f3887c90fa089d867"
+  integrity sha512-1EfoIH5I3jDEhIkc5crewdJ4xRPNDtNb/LhauRM4WGTyK96mcRZU06yoDDGEhOI4aUbBg6sPwVd/ajLyxMB2tw==
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
