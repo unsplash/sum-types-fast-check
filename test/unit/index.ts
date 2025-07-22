@@ -28,7 +28,7 @@ describe("index", () => {
     const sums = fc.sample(weatherArb)
 
     it("generates nullary values using nullary arbitrary", () => {
-      expect(sums).toContainEqual(Weather.mk.Sun)
+      expect(sums).toContainEqual(Weather.mk.Sun(null))
     })
 
     it("generates non-nullary values using provided arbitrary", () => {

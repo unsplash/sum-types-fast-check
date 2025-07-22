@@ -60,12 +60,7 @@ export const getArb =
             val => [tag, val] as const,
           ),
         )
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore We can't distinguish a nullary constructor from a
-        // constructor that holds `null`, however for reference equality for
-        // the likes of Jest it's important that we don't call the function on
-        // nullary values.
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        .map(([tag, val]): A => (val === null ? sum.mk[tag] : sum.mk[tag](val)))
+        .map(([tag, val]): A => sum.mk[tag](val))
     )
   }
